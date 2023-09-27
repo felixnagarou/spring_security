@@ -15,33 +15,33 @@ public class PrivateController {
         HttpSession session = request.getSession();
         Client client = (Client) session.getAttribute("client");
         if (client != null){
-        return "private/home";
+        return "/private/privateSpace";
         }
         return "redirect:";
     }
 
 
-    @GetMapping("/private")
-    public String getPrivateFavoritesPage(HttpServletRequest request){
-        HttpSession session = request.getSession();
-        Client client = (Client) session.getAttribute("client");
-        if (client != null){
-            return "private/favorites";
-        }
-        return "redirect:";
+  @GetMapping("/private")
+  public String getPrivateFavoritesPage(HttpServletRequest request){
+      HttpSession session = request.getSession();
+      Client client = (Client) session.getAttribute("client");
+      if (client != null){
+          return "private/favorites";
+      }
+      return "redirect:/privateSpace";
 
-    }
+  }
 
-    @GetMapping("/private")
-    public String getPrivateUtilsPage(HttpServletRequest request){
-        HttpSession session = request.getSession();
-        Client client = (Client) session.getAttribute("client");
-        if (client != null){
-            return "private/utils";
-        }
-        return "redirect:";
+//@GetMapping("/private")
+//public String getPrivateUtilsPage(HttpServletRequest request){
+//    HttpSession session = request.getSession();
+//    Client client = (Client) session.getAttribute("client");
+//    if (client != null){
+//        return "private/utils";
+//    }
+//    return "redirect:/privateSpace";
 
-    }
+//}
 
 
 

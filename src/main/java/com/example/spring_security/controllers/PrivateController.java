@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -27,6 +28,14 @@ public class PrivateController {
     public String getAboutPage(HttpServletRequest request){
       return "/about";
   }
+
+  @PostMapping("/disconnect")
+  public String logOutRedirect(HttpServletRequest request){
+    return "redirect:/auth/register";
+
+  }
+
+
 
 
 

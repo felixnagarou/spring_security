@@ -50,6 +50,8 @@ public class AuthService {
         // SecurityContextHolder.getContext().setAuthentication(null);
     }
 
+
+
     public void disconnect(){
         SecurityContextHolder.getContext().setAuthentication(null);
     }

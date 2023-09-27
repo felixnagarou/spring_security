@@ -47,9 +47,12 @@ public class AuthController {
     @PostMapping("/authenticate")
     public String authenticateHandler(AuthenticationRequest formValues, HttpServletRequest request) {
         authService.authenticate(formValues);
+        System.out.println(request.getRequestURI());
 
         SecurityContext context = SecurityContextHolder.getContext();
         HttpSession session = request.getSession();
+
+
 
         session.setAttribute("SPRING_SECURITY_CONTEXT", context);
 

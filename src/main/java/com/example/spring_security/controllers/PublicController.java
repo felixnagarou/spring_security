@@ -30,5 +30,10 @@ public class PublicController {
     //    return "redirect:/auth" + mode;
     //}
 
+    @GetMapping("/about")
+    public String getAboutPage(){
+        return "about";
+    }
+
 
 }

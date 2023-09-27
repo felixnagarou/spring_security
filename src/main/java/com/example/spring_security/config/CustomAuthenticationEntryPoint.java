@@ -1,6 +1,7 @@
 package com.example.spring_security.config;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.AuthenticationException;
@@ -14,6 +15,11 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+        response.setContentType(request.getRequestURI());
         response.sendRedirect(request.getContextPath() + "/auth/authenticate");
+       // response.setContentType(request.getRequestURI());
+
+        //System.out.println(request.getRequestURI());
+
     }
 }

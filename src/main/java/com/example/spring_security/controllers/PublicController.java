@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/")
+@RequestMapping("/public")
 public class PublicController {
 
     private final ClientService clientService;
@@ -25,16 +25,5 @@ public class PublicController {
         return "home";
     }
 
-    @PostMapping("/login")
-    public String login(@ModelAttribute("client") Client client, HttpServletRequest request) {
-        request.setAttribute("client", clientService.getClientData());
-        if (client != null && client.getIdentifiant().equals("Zosyme de Panopolis") && client.getPassword() != null && client.getPassword().equals("CorpusHermeticum")) {
-            HttpSession session = request.getSession();
-            session.setAttribute("client", client);
-
-            return "redirect:/private";
-        }
-        return "redirect:/login";
-    }
 
 }

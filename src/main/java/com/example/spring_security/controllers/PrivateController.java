@@ -12,36 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PrivateController {
     @GetMapping
     public String getPrivateHomePage(HttpServletRequest request){
-        HttpSession session = request.getSession();
-        Client client = (Client) session.getAttribute("client");
-        if (client != null){
-        return "/private/privateSpace";
-        }
-        return "redirect:";
+        return "private/privateSpace";
     }
-
-
-  @GetMapping("/private")
-  public String getPrivateFavoritesPage(HttpServletRequest request){
-      HttpSession session = request.getSession();
-      Client client = (Client) session.getAttribute("client");
-      if (client != null){
-          return "private/favorites";
-      }
-      return "redirect:/privateSpace";
-
-  }
-
-//@GetMapping("/private")
-//public String getPrivateUtilsPage(HttpServletRequest request){
-//    HttpSession session = request.getSession();
-//    Client client = (Client) session.getAttribute("client");
-//    if (client != null){
-//        return "private/utils";
-//    }
-//    return "redirect:/privateSpace";
-
-//}
 
 
 

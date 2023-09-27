@@ -21,8 +21,8 @@ public class SecurityConfig {
                 .loginPage("/auth/authenticate")
                 .and()
                 .authorizeRequests()
-                .requestMatchers("/", "/login").permitAll()
-                .anyRequest().authenticated()
+                .requestMatchers("/public", "/public/**").permitAll()
+                .requestMatchers("/private", "/private/**").authenticated()
                 .and()
                 .httpBasic();
 

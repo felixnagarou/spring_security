@@ -6,9 +6,9 @@
 </head>
 <body>
 <main>
-    <h1>Register here</h1>
+    <h1><span th:if="${mode.equals('authenticate')}">Authenticate</span>Register here</h1>
     <hr>
-    <form action="#" th:action="@{/auth/register}" method="post" th:object="${formValues}">
+    <form action="#" th:action="@{/auth/${mode}}" method="post" th:object="${formValues}">
     <div>
         <label for="email">Email</label>
         <input type="email" id="email" required th:field="*{email}">

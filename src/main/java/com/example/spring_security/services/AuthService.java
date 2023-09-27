@@ -37,4 +37,23 @@ public class AuthService {
     SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
+    public void authenticate(AuthenticationRequest request) {
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+                request.getEmail(),
+                request.getPassword()
+        );
+
+        Authentication authentication = authenticationManager.authenticate(token);
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        // SecurityContextHolder.getContext().setAuthentication(null);
+    }
+
+    public void disconnect(){
+        SecurityContextHolder.getContext().setAuthentication(null);
+    }
+
+
+
 }

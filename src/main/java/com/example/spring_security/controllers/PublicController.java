@@ -24,11 +24,11 @@ public class PublicController {
         return "home";
     }
 
-    @PostMapping
-    public String redirectAuth(String mode, Model model){
-        model.addAttribute("mode", mode);
-        return "redirect:/auth" + mode;
-    }
+    //@PostMapping
+    //public String redirectAuth(String mode, Model model){
+    //    model.addAttribute("mode", mode);
+    //    return "redirect:/auth" + mode;
+    //}
 
 
 }

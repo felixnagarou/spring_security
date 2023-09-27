@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Espace personnel</title>
 </head>
 <body>
 <header>
-    <ul id="navbar">
-        <li><a href="privateSpace.html">Mon espace</a></li>
-        <li><a href="utils.html">Utils</a></li>
-        <li><a href="favorites.html">Favorites</a></li>
-        <li><a href="/templates/about.html">About</a></li>
-        <li><a href="/templates/home.html">Logout</a></li>
+    <th:block th:fragment="navbar">
+    <ul id="navbar" >
+        <li><a href="/private/space">Mon espace</a></li>
+        <li><a href="/private/utils">Utils</a></li>
+        <li><a href="/private/favorites">Favorites</a></li>
+        <li><a href="/private/about">About</a></li>
+        <li><a href="/private/disconnect">Logout</a></li>
     </ul>
+    </th:block>
 
 </header>
 <main>

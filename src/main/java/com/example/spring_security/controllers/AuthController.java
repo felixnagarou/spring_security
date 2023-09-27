@@ -43,4 +43,25 @@ public class AuthController {
         session.setAttribute("SPRING_SECURITY_CONTEXT", context);
         return "redirect:/private";
     }
+
+    @PostMapping("/authenticate")
+    public String authenticateHandler(AuthenticationRequest formValues, HttpServletRequest request) {
+        authService.authenticate(formValues);
+
+        SecurityContext context = SecurityContextHolder.getContext();
+        HttpSession session = request.getSession();
+
+        session.setAttribute("SPRING_SECURITY_CONTEXT", context);
+
+        return "redirect:/private/space";
+    }
+
+    @PostMapping("/disconnect")
+    public String disconnectHandler(HttpServletRequest request){
+        HttpSession session = request.getSession();
+
+        SecurityContext context = SecurityContextHolder.getContext();
+        session.setAttribute("SPRING_SECURITY_CONTEXT", context);
+        return "redirect:/auth";
+    }
 }

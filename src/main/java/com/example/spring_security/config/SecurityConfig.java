@@ -1,5 +1,6 @@
 package com.example.spring_security.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,19 +14,19 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
+    private final CustomAuthenticationEntryPoint authenticationEntryPoint;
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .formLogin()
-                .loginPage("/auth/authenticate")
+                .exceptionHandling()
+                .authenticationEntryPoint(authenticationEntryPoint)
                 .and()
                 .authorizeRequests()
                 .requestMatchers("/public", "/public/**").permitAll()
-                .requestMatchers("/private", "/private/**").authenticated()
-                .and()
-                .httpBasic(Customizer.withDefaults());
+                .requestMatchers("/private", "/private/**").authenticated();
 
         return http.build();
     }

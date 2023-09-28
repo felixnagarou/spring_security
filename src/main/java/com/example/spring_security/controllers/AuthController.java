@@ -2,6 +2,7 @@ package com.example.spring_security.controllers;
 
 import com.example.spring_security.models.AuthenticationRequest;
 import com.example.spring_security.services.AuthService;
+import com.example.spring_security.services.PostAuthService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/auth")
 public class AuthController {
     private final AuthService authService;
+    private final PostAuthService postAuthService;
 
     @GetMapping("/register")
     public String getRegisterForm(Model model){
@@ -47,7 +49,8 @@ public class AuthController {
     @PostMapping("/authenticate")
     public String authenticateHandler(AuthenticationRequest formValues, HttpServletRequest request) {
         authService.authenticate(formValues);
-        System.out.println(request.getRequestURI());
+        String adress = postAuthService.getAdress();
+        System.out.println(adress);
 
         SecurityContext context = SecurityContextHolder.getContext();
         HttpSession session = request.getSession();
@@ -56,7 +59,7 @@ public class AuthController {
 
         session.setAttribute("SPRING_SECURITY_CONTEXT", context);
 
-        return "redirect:/private/space";
+        return "redirect:/private/" +adress;
     }
 
     @PostMapping("/disconnect")

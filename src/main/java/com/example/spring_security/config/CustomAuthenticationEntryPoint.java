@@ -17,8 +17,12 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        PostAuthService postAuthService = new PostAuthService().
+        if (request.getRequestURI().startsWith("/api/v1/")){
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
+        } else {
+        PostAuthService postAuthService = new PostAuthService(request.getRequestURI());
         response.sendRedirect(request.getContextPath() + "/auth/authenticate");
+        }
 
 
        // response.setContentType(request.getRequestURI());

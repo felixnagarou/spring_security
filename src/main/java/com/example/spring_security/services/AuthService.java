@@ -1,5 +1,6 @@
 package com.example.spring_security.services;
 
+import com.example.spring_security.components.JwtTokenGenerator;
 import com.example.spring_security.entities.UserEntity;
 import com.example.spring_security.models.AuthenticationRequest;
 import com.example.spring_security.repositories.UserEntityRepository;
@@ -18,8 +19,9 @@ public class AuthService {
     private final UserEntityRepository userEntityRepository;
     private final AuthenticationManager authenticationManager;
     private final PasswordEncoder passwordEncoder;
+    private final JwtTokenGenerator tokenGenerator;
 
-    public void register(AuthenticationRequest request){
+    public String register(AuthenticationRequest request){
         if (!userEntityRepository.existsByEmail(request.getEmail())){
             UserEntity newUser = new UserEntity();
             newUser.setEmail(request.getEmail());
@@ -35,9 +37,10 @@ public class AuthService {
     Authentication authentication = authenticationManager.authenticate(token);
 
     SecurityContextHolder.getContext().setAuthentication(authentication);
+    return tokenGenerator.generateToken(authentication);
     }
 
-    public void authenticate(AuthenticationRequest request) {
+    public String authenticate(AuthenticationRequest request) {
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
                 request.getEmail(),
                 request.getPassword()
@@ -46,6 +49,7 @@ public class AuthService {
         Authentication authentication = authenticationManager.authenticate(token);
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        return tokenGenerator.generateToken(authentication);
 
         // SecurityContextHolder.getContext().setAuthentication(null);
     }
